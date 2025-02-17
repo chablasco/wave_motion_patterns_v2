@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CB Wave Motion Patterns v2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      background(255, 0, 0);
+    }
+
+    function draw() {
+      // Create motion trail by drawing a semi-transparent rectangle over the previous frame
+      fill(255, 0, 0, 0); // Red background with slight transparency
+      rect(0, 0, width, height);
+
+      translate(width / 2, height / 2);
+
+      let mag = 600;
+      let s = 3;
+
+      for (let i = 0; i < 100; i++) {
+        let w = map(tan(radians(frameCount)), -1, 1, -100, 100);
+        let wave1 = map(tan(radians(frameCount * 0.1 + i + w)), -1, 1, -mag, mag);
+        let wave2 = map(tan(radians(frameCount + i)), -1, 1, -mag, mag);
+        let c = map(tan(radians(frameCount * 5 + i)), -1, 1, 0, 255);
+        fill(c);
+        noStroke();
+        ellipse(wave1, wave2, s, s);
+      }
+
+      for (let i = 0; i < 100; i++) {
+        let w = map(sin(radians(frameCount)), -1, 1, -100, 100);
+        let wave1 = map(tan(radians(frameCount * 0.1 + i + w)), -1, 1, -mag, mag);
+        let wave2 = map(sin(radians(frameCount + i)), -1, 1, -mag, mag);
+        let c = map(tan(radians(frameCount * 5 + i)), -1, 1, 0, 255);
+        fill(c);
+        ellipse(wave1, wave2, s, s);
+      }
+
+      for (let i = 0; i < 100; i++) {
+        let w = map(cos(radians(frameCount)), -1, 1, -100, 100);
+        let wave1 = map(tan(radians(frameCount * 0.1 + i + w)), -1, 1, -mag, mag);
+        let wave2 = map(tan(radians(frameCount + i)), -1, 1, -mag, mag);
+        let c = map(sin(radians(frameCount * 5 + i)), -1, 1, 0, 255);
+        fill(c);
+        ellipse(wave1, wave2, s, s);
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
+</body>
+</html>
