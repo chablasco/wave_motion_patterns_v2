@@ -60,6 +60,16 @@
       }
     }
 
+   function mousePressed() {
+      fullscreen(!fullscreen());
+    }
+
+    function keyPressed() {
+      if (key === 's' || key === 'S') {
+        saveCanvas('cb_composition', 'png');
+      }
+    }
+
     function windowResized() {
       resizeCanvas(windowWidth, windowHeight);
     }
